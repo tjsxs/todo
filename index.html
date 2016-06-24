@@ -10,16 +10,19 @@
 
 <body>
     <div id="header">
-        <h2 class="text-center">The To-Do List</h2>
+        <h2 class="text-center">To-Do List</h2>
     </div>
     <div id="container">
         <div class="list-wrap">
-            <h3>List name</h3>
-            <input type="text" placeholder="Enter item">
-            <ul class="list">
-                <li><a href="#" onclick="myFunction();">list1</a></li>
-                <li><a href="#" onclick="myFunction();">list1</a></li>
-                
+            <h3>My list</h3>
+            <div class="form-holder">
+                <form action="#" id="list-form">
+                    <input id="submit-btn" type="submit" value="Add" onclick="addItem();" />
+                    <input id="input-value" type="text" placeholder="Enter item">
+                </form>
+            </div>
+            <ul id="list" class="list">
+                <li id="fixed"></li>
             </ul>
         </div>
     </div>

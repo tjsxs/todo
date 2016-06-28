@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>To DO List</title>
+    <link rel="stylesheet" href="css/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js"></script>
 </head>
@@ -17,7 +18,7 @@
             <h3>My list</h3>
             <div class="form-holder">
                 <form action="#" id="list-form">
-                    <input id="submit-btn" type="submit" value="Add" onclick="addItem();" />
+                    <input id="submit-btn" type="submit" value="Add" onclick="addItem(); return false;" />
                     <input id="input-value" type="text" placeholder="Enter item">
                 </form>
             </div>

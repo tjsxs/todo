@@ -10,27 +10,34 @@ function addItem(){
     
     var newID = ranGenerator();
     
-    var li = "<li id='item-"+ newID +"' onClick='deleteItem(this.id);'>" + currentValue.value + "</li>";
+    var li = "<li id='item-"+ newID +"' onClick='deleteItem(this);'>" + currentValue.value + "</li>";
     
     var fixedItem = document.getElementById("fixed");
     fixedItem.insertAdjacentHTML('afterEnd', li);
     currentValue.value = null;
 }
 
-function deleteItem(itemID){
-    var itemToDelete = document.getElementById(itemID);
-    itemToDelete.parentNode.removeChild(itemToDelete);
+function deleteItem(item){
+    //var itemToDelete = document.getElementById(itemID);
+    item.parentNode.removeChild(item);
 }
 
-
 function ranGenerator(){
-    var ranID = Math.round(Math.random() * 1000);
+    var ranID;
     
-    for(var key in ids){
-        if(ids[key] === ranID){
-            ranID = ranGenerator();
+    while(true){
+        ranID = Math.round(Math.random() * 1000);
+        var found = false;
+        for(var i=0; i<ids.length; i++){
+            if(ranID === ids[i]){
+                found = true;
+                break;
+            }
+        }
+        if(found == false){
+            ids.push(ranID);
+            break;
         }
     }
-    ids.push(ranID);
     return ranID;
 }

@@ -1,23 +1,45 @@
 var ids = [];
 var currentValue = 0;
+var fixedItem = document.getElementById("list");
 
-function addItem(){
-    currentValue = document.getElementById("input-value");
-    if(currentValue.value === null || currentValue.value === ""){
-        alert("Please input some value!");
-        return false;
-    }
+
+// Create li HTML elements for list item
+var generateItem = function(){
     
-    var li = "<li><label><input type='checkbox' name='vehicle' value='Bike'>"+currentValue.value+"</label>"+
-        "<button class='btn delete-btn'></button>"+
-        "<button class='btn edit-btn'></button>"+
-        "</li>";
+    var listItem = document.createElement("li");
     
-    var fixedItem = document.getElementById("fixed");
-    fixedItem.insertAdjacentHTML('afterEnd', li);
-    currentValue.value = null;
+    var label = document.createElement("label");
+        label.textContent ="aha";
+    
+    var checkBox = document.createElement("input");
+        checkBox.type="checkbox";
+    
+    var editButton = document.createElement("button");
+        editButton.className="btn edit-btn";
+    
+    var deleteButton = document.createElement("button");
+        deleteButton.className="btn delete-btn";
+    
+    var editInput = document.createElement("input");
+        editInput.type="text";
+    
+    listItem.appendChild(checkBox);
+    listItem.appendChild(label);
+    label.innerHTML = document.getElementById("input-value").value;
+    listItem.appendChild(deleteButton);
+    listItem.appendChild(editButton);
+    
+    fixedItem.insertBefore(listItem, fixedItem.firstChild);
+    document.getElementById("input-value").value="";  
+    
+    deleteButton.addEventListener("click", deleteItem);
 }
 
-function deleteItem(item){
-    item.parentNode.removeChild(item);
-} 
+
+// Event listner for button
+document.getElementById("submit-btn").addEventListener("click", generateItem);
+
+//Delete item
+function deleteItem(){
+    this.parentNode.parentNode.removeChild(this.parentNode);
+}

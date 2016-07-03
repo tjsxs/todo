@@ -8,7 +8,10 @@ function addItem(){
         return false;
     }
     
-    var li = "<li onClick='deleteItem(this);'>" + currentValue.value + "</li>";
+    var li = "<li><label><input type='checkbox' name='vehicle' value='Bike'>"+currentValue.value+"</label>"+
+        "<button class='btn delete-btn'></button>"+
+        "<button class='btn edit-btn'></button>"+
+        "</li>";
     
     var fixedItem = document.getElementById("fixed");
     fixedItem.insertAdjacentHTML('afterEnd', li);

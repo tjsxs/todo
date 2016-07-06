@@ -1,6 +1,7 @@
 var ids = [];
 var currentValue = 0;
 var fixedItem = document.getElementById("list");
+var archive = document.getElementById("archive");
 
 
 // Create li HTML elements for list item
@@ -36,7 +37,8 @@ var generateItem = function(){
     
     deleteButton.addEventListener("click", deleteItem);
     editButton.addEventListener("click", editItem);
-}
+    checkBox.addEventListener("change", completed);
+};
 
 
 // Event listner for button
@@ -66,4 +68,16 @@ function editItem(){
         li.replaceChild(label, li.childNodes[1]);
         li.className = "";
     }
+}
+
+// Completed items
+function completed(){
+    var li = this.parentNode;
+    
+    if(this.checked){
+        archive.insertBefore(li, archive.firstChild);
+    }else{
+        fixedItem.insertBefore(li, fixedItem.firstChild);
+    }
+    
 }

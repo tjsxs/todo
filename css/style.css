@@ -39,7 +39,7 @@ h3{
     position: relative;
     border: 1px solid #dadada;
 }
-.list{
+ul{
     margin: 0;
     padding: 0;
 }
@@ -60,6 +60,10 @@ li:hover{
 }
 .list-wrap{
     max-width: 250px
+}
+#archive label {
+    text-decoration: line-through;
+    color: #666666;
 }
 input[type="text"]{
     padding: 5px 0;

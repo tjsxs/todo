@@ -1,11 +1,13 @@
-var ids = [];
-var currentValue = 0;
 var fixedItem = document.getElementById("list");
 var archive = document.getElementById("archive");
 
 
 // Create li HTML elements for list item
 var generateItem = function(){
+    
+    if(document.getElementById("input-value").value == ""){
+        return null;
+    }
     
     var listItem = document.createElement("li");
     
@@ -14,6 +16,7 @@ var generateItem = function(){
     
     var checkBox = document.createElement("input");
         checkBox.type="checkbox";
+        checkBox.className="checkbox";
     
     var editButton = document.createElement("input");
         editButton.type="button";
@@ -34,25 +37,18 @@ var generateItem = function(){
     
     fixedItem.insertBefore(listItem, fixedItem.firstChild);
     document.getElementById("input-value").value="";  
-    
-    deleteButton.addEventListener("click", deleteItem);
-    editButton.addEventListener("click", editItem);
-    checkBox.addEventListener("change", completed);
 };
 
 
-// Event listner for button
-document.getElementById("submit-btn").addEventListener("click", generateItem);
 
 //Delete item
-function deleteItem(){
-    this.parentNode.parentNode.removeChild(this.parentNode);
+function deleteItem(item){
+    item.parentNode.parentNode.removeChild(item.parentNode);
 }
 
 // Edit list Item
-function editItem(){
-    //var temp = this.parentNode.children[1];
-    var li = this.parentNode,
+function editItem(item){
+    var li = item.parentNode,
         liChild = li.childNodes[1],
         ip = document.createElement("input"),
         label = document.createElement("label");
@@ -71,13 +67,35 @@ function editItem(){
 }
 
 // Completed items
-function completed(){
-    var li = this.parentNode;
+function completed(item){
+    var li = item.parentNode;
     
-    if(this.checked){
+    if(item.checked){
         archive.insertBefore(li, archive.firstChild);
     }else{
         fixedItem.insertBefore(li, fixedItem.firstChild);
     }
     
+}
+
+// Event listeners
+window.onload = function(){
+    document.getElementById("submit-btn").addEventListener("click", generateItem);
+    document.getElementById("list").addEventListener("click", listener);
+    document.getElementById("archive").addEventListener("click", listener);
+}
+
+// Listner function
+function listener (e){
+    var item = e.target;
+    
+    if(item.className == "btn delete-btn"){
+        deleteItem(item);
+    }
+    else if(item.className == "btn edit-btn"){
+        editItem(item);
+        
+    }else if(item.className == "checkbox"){
+        completed(item);
+    }
 }
